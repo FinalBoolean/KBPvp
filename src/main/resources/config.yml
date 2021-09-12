@@ -1,0 +1,7 @@
+messages:
+  prefix: "&aKBPvp"
+  streak:
+    message: "&a%player% is on a %streak% streak!"
+  killMessages:
+    deathMessage: "&cYou were knocked by %player%"
+    killMessage: "&aYou knocked %player%"
