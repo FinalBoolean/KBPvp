@@ -5,3 +5,6 @@ messages:
   killMessages:
     deathMessage: "&cYou were knocked by %player%"
     killMessage: "&aYou knocked %player%"
+
+settings:
+  yLevel:

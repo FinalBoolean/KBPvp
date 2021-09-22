@@ -11,6 +11,7 @@ public class Config {
 
 
     public static String KILL_MESSAGE, PREFIX, DEATH_MESSAGE, STREAK_MESSAGE;
+    public static int Y_LEVEL;
 
     /**
      * messages:
@@ -20,6 +21,9 @@ public class Config {
      *   killMessages:
      *     deathMessage: "&cYou were knocked by %player%"
      *     killMessage: "&aYou knocked %player%"
+     *
+     * settings:
+     *   yLevel:
      */
 
     public static void loadConfigurations() {
@@ -28,5 +32,7 @@ public class Config {
         PREFIX = config.getString("messages.prefix");
         DEATH_MESSAGE = config.getString("messages.killMessages.deathMessage");
         STREAK_MESSAGE = config.getString("messages.streak.message");
+        Y_LEVEL = config.getInt("settings.yLevel");
+
     }
 }
