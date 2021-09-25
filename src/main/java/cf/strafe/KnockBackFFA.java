@@ -22,6 +22,7 @@ public enum KnockBackFFA {
     }
 
     public void onEnable() {
+        handleBukkit();
         ItemManager.INSTANCE.init();
         Config.loadConfigurations();
     }
