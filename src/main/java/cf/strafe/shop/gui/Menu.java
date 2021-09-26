@@ -32,7 +32,7 @@ public abstract class Menu {
         assert meta != null;
         meta.setDisplayName(ColorUtil.translate(name));
 
-        meta.setLore(Arrays.asList(lore));
+        meta.setLore(ColorUtil.translate(Arrays.asList(lore)));
 
         item.setItemMeta(meta);
 

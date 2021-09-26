@@ -38,14 +38,15 @@ public class ScoreboardManager {
             entry.getKey().getPlayer().setPlayerListName(entry.getKey().getPlayer().getDisplayName());
 
 
-            board.updateTitle("&3&lStrafedKit");
+            board.updateTitle(ColorUtil.translate("&3&lStrafedKit"));
             board.updateLine(0, ColorUtil.translate("&7&m------------------"));
             board.updateLine(1, ColorUtil.translate("&8» &7Ping: &b" + pData.getPlayerPing()));
-            board.updateLines("2", ColorUtil.translate("&8» &7Coins: &b" + pData.getCoins()));
+            board.updateLine(2, ColorUtil.translate("&8» &7Coins: &b" + pData.getCoins()));
             board.updateLine(3, "");
             board.updateLine(4, ColorUtil.translate("&8» &7Kills: &b" + pData.getKills()));
             board.updateLine(5, ColorUtil.translate("&8» &7Deaths: &b" + pData.getDeaths()));
-            board.updateLine(5, ColorUtil.translate("&8» &7Streak: &b" + pData.getKillStreak()));
+            board.updateLine(6, ColorUtil.translate("&8» &7Streak: &b" + pData.getKillStreak()));
+            board.updateLine(7, ColorUtil.translate("&7&m------------------"));
 
         }
     }

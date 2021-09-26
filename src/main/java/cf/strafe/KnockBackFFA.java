@@ -1,9 +1,6 @@
 package cf.strafe;
 
-import cf.strafe.commands.KitEditCommand;
-import cf.strafe.commands.MyHelmetsCommand;
-import cf.strafe.commands.MyPacksCommand;
-import cf.strafe.commands.MySticksCommand;
+import cf.strafe.commands.*;
 import cf.strafe.config.Config;
 import cf.strafe.data.DataManager;
 import cf.strafe.listener.DataListener;
@@ -55,8 +52,10 @@ public enum KnockBackFFA {
         plugin.getServer().getPluginManager().registerEvents(new PlayerListener(), plugin);
         plugin.getServer().getPluginManager().registerEvents(new DataListener(), plugin);
         plugin.getCommand("myhelmets").setExecutor(new MyHelmetsCommand());
+        plugin.getCommand("myhelmets").setExecutor(new MyHelmetsCommand());
         plugin.getCommand("mypacks").setExecutor(new MyPacksCommand());
         plugin.getCommand("mysticks").setExecutor(new MySticksCommand());
         plugin.getCommand("kitedit").setExecutor(new KitEditCommand());
+        plugin.getCommand("shop").setExecutor(new ShopCommand());
     }
 }

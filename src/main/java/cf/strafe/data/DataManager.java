@@ -14,15 +14,17 @@ public enum DataManager {
 
     public void addPlayer(Player player) {
         KnockBackFFA.INSTANCE.getExecutorService().execute(() -> {
-            playerDataMap.put(player.getUniqueId(), new PlayerData(player));
-            getPlayer(player).loadData();
+            PlayerData playerData = new PlayerData(player);
+            playerDataMap.put(player.getUniqueId(), playerData);
+            playerData.loadData();
+            KnockBackFFA.INSTANCE.getScoreboardManager().create(player);
         });
     }
 
     public void removePlayer(Player player) {
         KnockBackFFA.INSTANCE.getExecutorService().execute(() -> {
-            playerDataMap.remove(player.getUniqueId(), new PlayerData(player));
             getPlayer(player).saveData();
+            playerDataMap.remove(player.getUniqueId(), new PlayerData(player));
         });
     }
 

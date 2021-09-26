@@ -36,7 +36,6 @@ public class BroadcastManager {
                     }
                     data.saveData();
                 }
-
             }
         }, 0, Config.DELAY);
     }

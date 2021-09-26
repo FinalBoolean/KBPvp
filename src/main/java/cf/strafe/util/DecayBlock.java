@@ -4,6 +4,7 @@ import cf.strafe.KnockBackFFA;
 import cf.strafe.shop.nodes.BlockItem;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 
 public class DecayBlock {
 
@@ -15,15 +16,17 @@ public class DecayBlock {
             stage[0]++;
             switch (stage[0]) {
                 case 1:
-                    location.getBlock().setType(blockItem.getIcon().getType());
+                    location.getBlock().setTypeIdAndData(blockItem.getIcon().getData().getItemTypeId(), blockItem.getIcon().getData().getData(), false);
+
                     break;
                 case 2:
-                    location.getBlock().setType(blockItem.getPhase1().getType());
+                    location.getBlock().setTypeIdAndData(blockItem.getPhase1().getData().getItemTypeId(), blockItem.getPhase1().getData().getData(), false);
                     break;
                 case 3:
-                    location.getBlock().setType(blockItem.getPhase2().getType());
+                    location.getBlock().setTypeIdAndData(blockItem.getPhase2().getData().getItemTypeId(), blockItem.getPhase2().getData().getData(), false);
                     break;
                 case 4:
+                    location.getBlock().setType(Material.AIR);
                     Bukkit.getScheduler().cancelTask(id[0]);
                     break;
             }

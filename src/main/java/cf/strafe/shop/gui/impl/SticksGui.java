@@ -14,9 +14,9 @@ public class SticksGui extends Menu {
 
     @Override
     public void loadMenu() {
-        ItemManager.INSTANCE.getItems().stream().filter(Item::isStick).forEach(item -> {
-            inventory.addItem(createGuiItem(item.getIcon().getType(), "&f&l&o" + item.getName(), "Custom Stick", "", "&aClick to Select"));
+        data.getPurchasedItems().stream().filter(Item::isStick).forEach(item -> {
+            inventory.addItem(createGuiItem(item.getIcon().getType(), "&f&l&o" + item.getName(), "&7Custom Stick", "", "&aClick to Select"));
         });
-        inventory.setItem(53, createGuiItem(Material.ARROW, "Back"));
+        inventory.setItem(53, createGuiItem(Material.ARROW, "&cBack"));
     }
 }

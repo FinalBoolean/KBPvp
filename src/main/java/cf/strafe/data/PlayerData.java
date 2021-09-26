@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import java.util.regex.Pattern;
 
@@ -29,7 +30,7 @@ import java.util.regex.Pattern;
 public class PlayerData {
     private final Player player;
     private final UUID uuid;
-    private final ArrayList<Item> purchasedItems = new ArrayList<>();
+    private final List<Item> purchasedItems = new ArrayList<>();
     private StickItem stickItem;
     private BlockItem blockItem;
     private HatItem hatItem;
@@ -98,9 +99,14 @@ public class PlayerData {
             load.set("coins", getCoins());
             load.set("blockItem", blockItem.getName());
             load.set("stickItem", stickItem.getName());
-            load.set("hatItem", stickItem == null ? "Null" : stickItem.getName());
+            load.set("hatItem", hatItem.getName());
             for(Item item : purchasedItems) {
                 load.set("items." + item.getName(), item.getName());
+            }
+            try {
+                load.save(player);
+            } catch (IOException e) {
+                //Ignored
             }
         }
     }
@@ -158,7 +164,10 @@ public class PlayerData {
                 player.createNewFile();
                 setBlockItem((BlockItem) ItemManager.INSTANCE.findItem("DEFAULT_PACK"));
                 setStickItem((StickItem) ItemManager.INSTANCE.findItem("DEFAULT_STICK"));
-                setBlockItem((BlockItem) ItemManager.INSTANCE.findItem("NO_HELMET"));
+                setHatItem((HatItem) ItemManager.INSTANCE.findItem("NO_HELMET"));
+                purchasedItems.add(getBlockItem());
+                purchasedItems.add(getStickItem());
+                purchasedItems.add(getHatItem());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -168,7 +177,7 @@ public class PlayerData {
             setKillStreak(load.getInt("killStreak"));
             setDeaths(load.getInt("deaths"));
             setCoins(load.getInt("coins"));
-            for(String key : load.getKeys(false)) {
+            for(String key : load.getConfigurationSection("items").getKeys(false)) {
                 purchasedItems.add(ItemManager.INSTANCE.findItem(load.getString("items." + key)));
             }
             setBlockItem((BlockItem) ItemManager.INSTANCE.findItem(load.getString("blockItem")));

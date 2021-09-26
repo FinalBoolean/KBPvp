@@ -1,6 +1,7 @@
 package cf.strafe.commands;
 
 import cf.strafe.data.DataManager;
+import cf.strafe.shop.gui.impl.BlockGui;
 import cf.strafe.shop.gui.impl.SelectGui;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -12,8 +13,7 @@ public class ShopCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
         if(sender instanceof Player) {
             Player player = (Player) sender;
-            SelectGui selectGui = new SelectGui(DataManager.INSTANCE.getPlayer(player));
-            selectGui.openGui();
+            new SelectGui(DataManager.INSTANCE.getPlayer(player)).openGui();
         }
         return false;
     }

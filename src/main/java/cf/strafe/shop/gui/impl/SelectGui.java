@@ -11,7 +11,6 @@ public class SelectGui extends Menu {
 
     public SelectGui(PlayerData data) {
         super(data, Bukkit.createInventory(null, 27, "Select..."));
-        loadMenu();
     }
 
     @Override

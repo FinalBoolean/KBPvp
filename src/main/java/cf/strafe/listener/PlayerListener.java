@@ -57,6 +57,8 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onPlayerHit(EntityDamageByEntityEvent event) {
+        if(event.isCancelled())
+            return;
         if (event.getDamager() instanceof Player && event.getEntity() instanceof Player) {
             PlayerData player = DataManager.INSTANCE.getPlayer((Player) event.getDamager());
             PlayerData entity = DataManager.INSTANCE.getPlayer((Player) event.getEntity());
@@ -68,10 +70,12 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent event) {
+        if(event.isCancelled())
+            return;
         Item item = ItemManager.INSTANCE.findItem(ChatColor.stripColor(event.getItemInHand().getItemMeta().getDisplayName()));
         if (item != null && item.isBlock()) {
             new DecayBlock(event.getBlock().getLocation(), (BlockItem) item);
-            event.getPlayer().getInventory().addItem(item.getIcon());
+            event.getItemInHand().setAmount(64);
         } else {
             if(event.getItemInHand().getType() == Material.WEB) {
                 Bukkit.getScheduler().runTaskLater(KnockBackFFA.INSTANCE.getPlugin(), () -> {
@@ -123,6 +127,7 @@ public class PlayerListener implements Listener {
                                     player.sendMessage(ChatColor.RED + "You don't have enough coins to buy this.");
                                 }
                             } else if (e.getSlot() == 26) {
+                                player.closeInventory();
                                 new SelectGui(data).openGui();
                             }
                         }
@@ -131,12 +136,16 @@ public class PlayerListener implements Listener {
                     case "choose...": {
                         e.setCancelled(true);
                         if (e.getSlot() == 12) {
+                            player.closeInventory();
                             new SticksGui(data).openGui();
                         } else if (e.getSlot() == 13) {
+                            player.closeInventory();
                             new HelmetGui(data).openGui();
                         } else if (e.getSlot() == 14) {
+                            player.closeInventory();
                             new BlockGui(data).openGui();
                         } else if (e.getSlot() == 26) {
+                            player.closeInventory();
                             new SelectGui(data).openGui();
                         }
                         break;
@@ -144,7 +153,8 @@ public class PlayerListener implements Listener {
                     case "your block packs":
                     case "your helmets":
                     case "your sticks": {
-                        if (e.getCurrentItem() != null) {
+                        e.setCancelled(true);
+                        if (e.getCurrentItem() != null && e.getCurrentItem().getItemMeta().getDisplayName() != null) {
                             Item item = ItemManager.INSTANCE.findItem(ChatColor.stripColor(e.getCurrentItem().getItemMeta().getDisplayName()));
                             if (item != null) {
                                 if (item instanceof BlockItem) {
@@ -159,6 +169,7 @@ public class PlayerListener implements Listener {
                             }
                         }
                         if (e.getSlot() == 53) {
+                            player.closeInventory();
                             new ChooseGui(data).openGui();
                         }
                         break;

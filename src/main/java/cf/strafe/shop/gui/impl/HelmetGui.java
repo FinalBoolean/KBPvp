@@ -16,6 +16,6 @@ public class HelmetGui extends Menu {
         data.getPurchasedItems().stream().filter(Item::isHat).forEach(item -> {
             inventory.addItem(createGuiItem(item.getIcon().getType(), "&f&o&l" + item.getName(), "&8Helmet", "", "&aClick to select"));
         });
-        inventory.setItem(53, createGuiItem(Material.ARROW, "Back"));
+        inventory.setItem(53, createGuiItem(Material.ARROW, "&cBack"));
     }
 }

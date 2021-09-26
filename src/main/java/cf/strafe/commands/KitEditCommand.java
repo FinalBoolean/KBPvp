@@ -8,6 +8,7 @@ import cf.strafe.shop.ItemManager;
 import cf.strafe.shop.nodes.BlockItem;
 import cf.strafe.shop.nodes.HatItem;
 import cf.strafe.shop.nodes.StickItem;
+import cf.strafe.util.ColorUtil;
 import com.avaje.ebeaninternal.server.persist.BindValues;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -29,9 +30,14 @@ public class KitEditCommand implements CommandExecutor {
                     data.getPlayer().sendMessage(ChatColor.RED + "You need to be in spawn to use this command!");
                     return false;
                 }
+                if(data.isEditing()) {
+                    data.getPlayer().sendMessage(ChatColor.RED + "You are already saving.");
+                    return false;
+                }
+
 
                 data.getPlayer().getInventory().setItem(data.getStickSlot(), data.getStickItem().getStick());
-                data.getPlayer().getInventory().setItem(data.getBlockSlot(), new ItemStack(data.getBlockItem().getIcon().getType(), 64));
+                data.getPlayer().getInventory().setItem(data.getBlockSlot(), data.getBlockItem().getBlock());
                 data.getPlayer().getInventory().setItem(data.getWebSlot(), new ItemStack(Material.WEB));
                 data.getPlayer().getInventory().setItem(data.getPearlSlot(), new ItemStack(Material.ENDER_PEARL));
                 data.getPlayer().updateInventory();
@@ -72,6 +78,7 @@ public class KitEditCommand implements CommandExecutor {
                         }
                         data.getPlayer().sendMessage(ChatColor.GREEN + "Saved!");
                         data.clearInventory();
+                        data.setEditing(false);
                     });
 
                 } else {
