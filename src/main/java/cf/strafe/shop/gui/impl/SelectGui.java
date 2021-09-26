@@ -2,16 +2,10 @@ package cf.strafe.shop.gui.impl;
 
 import cf.strafe.data.PlayerData;
 import cf.strafe.shop.gui.Menu;
-import cf.strafe.util.ColorUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
-import org.bukkit.entity.HumanEntity;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-
-import java.util.Arrays;
 
 public class SelectGui extends Menu {
 

@@ -8,7 +8,6 @@ import cf.strafe.shop.nodes.BlockItem;
 import cf.strafe.shop.nodes.HatItem;
 import cf.strafe.shop.nodes.StickItem;
 import cf.strafe.util.ColorUtil;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Bukkit;

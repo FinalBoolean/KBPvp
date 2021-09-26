@@ -8,8 +8,8 @@ import cf.strafe.data.DataManager;
 import cf.strafe.listener.DataListener;
 import cf.strafe.listener.PlayerListener;
 import cf.strafe.manager.BroadcastManager;
-import cf.strafe.shop.ItemManager;
 import cf.strafe.manager.ScoreboardManager;
+import cf.strafe.shop.ItemManager;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 

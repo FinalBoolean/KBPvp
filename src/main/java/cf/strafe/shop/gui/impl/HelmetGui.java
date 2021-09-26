@@ -2,7 +2,6 @@ package cf.strafe.shop.gui.impl;
 
 import cf.strafe.data.PlayerData;
 import cf.strafe.shop.Item;
-import cf.strafe.shop.ItemManager;
 import cf.strafe.shop.gui.Menu;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;

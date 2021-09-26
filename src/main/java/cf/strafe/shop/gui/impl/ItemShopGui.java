@@ -9,7 +9,6 @@ import cf.strafe.shop.nodes.HatItem;
 import cf.strafe.shop.nodes.StickItem;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
 
 public class ItemShopGui extends Menu {
     public ItemShopGui(PlayerData data) {
