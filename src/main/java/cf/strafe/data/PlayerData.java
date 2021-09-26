@@ -68,12 +68,11 @@ public class PlayerData {
     }
 
     public void loadLayout() {
-        player.getInventory().setItem(getStickSlot(), stickItem.getStick());
-        player.getInventory().setItem(getBlockSlot(), new ItemStack(blockItem.getIcon().getType(), 64));
-        player.getInventory().setItem(getPearlSlot(), new ItemStack(Material.ENDER_PEARL));
-        player.getInventory().setItem(getWebSlot(), new ItemStack(Material.WEB));
-        player.getInventory().setHelmet(hatItem.getIcon());
-        player.updateInventory();
+        getPlayer().getInventory().setItem(getStickSlot(), getStickItem().getStick());
+        getPlayer().getInventory().setItem(getBlockSlot(), getBlockItem().getBlock());
+        getPlayer().getInventory().setItem(getWebSlot(), new ItemStack(Material.WEB));
+        getPlayer().getInventory().setItem(getPearlSlot(), new ItemStack(Material.ENDER_PEARL));
+        getPlayer().updateInventory();
     }
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
@@ -100,6 +99,10 @@ public class PlayerData {
             load.set("blockItem", blockItem.getName());
             load.set("stickItem", stickItem.getName());
             load.set("hatItem", hatItem.getName());
+            load.set("stickSlot", stickSlot);
+            load.set("blockSlot", blockSlot);
+            load.set("webSlot", webSlot);
+            load.set("pearlSlot", pearlSlot);
             for(Item item : purchasedItems) {
                 load.set("items." + item.getName(), item.getName());
             }
@@ -115,12 +118,27 @@ public class PlayerData {
         if(lastAttacked != null) {
             lastAttacked.loadLayout();
             player.sendMessage(ColorUtil.translate(Config.DEATH_MESSAGE).replace("%player%", lastAttacked.getPlayer().getName()));
+            lastAttacked.getPlayer().sendMessage(ColorUtil.translate(Config.KILL_MESSAGE)
+                    .replaceAll("%player%", player.getName()));
             lastAttacked.setKills(lastAttacked.getKills() + 1);
             lastAttacked.setKillStreak(lastAttacked.getKillStreak() + 1);
+            if(lastAttacked.getKillStreak() % 5 == 0) {
+                Bukkit.broadcastMessage(ColorUtil.translate(Config.STREAK_MESSAGE)
+                        .replaceAll("%streak%", String.valueOf(lastAttacked.getKillStreak()))
+                        .replaceAll("%player%", lastAttacked.getPlayer().getName()));
+            }
+
+            if (killStreak >= 5) {
+                lastAttacked.setCoins(lastAttacked.getCoins() + getKillStreak() / 2 + 5);
+            } else {
+                lastAttacked.setCoins(lastAttacked.getCoins() + 5);
+            }
+            lastAttacked = null;
             setKillStreak(0);
-            setDeaths(getDeaths() + 1);
-        } else player.sendMessage(ColorUtil.translate(Config.DEATH_MESSAGE));
+
+        } else player.sendMessage(ColorUtil.translate(Config.FELL_MESSAGE));
         clearInventory();
+        setDeaths(getDeaths() + 1);
         player.teleport(player.getWorld().getSpawnLocation());
     }
     /*
@@ -177,6 +195,10 @@ public class PlayerData {
             setKillStreak(load.getInt("killStreak"));
             setDeaths(load.getInt("deaths"));
             setCoins(load.getInt("coins"));
+            setStickSlot(load.getInt("stickSlot"));
+            setBlockSlot(load.getInt("blockSlot"));
+            setWebSlot(load.getInt("webSlot"));
+            setPearlSlot(load.getInt("pearlSlot"));
             for(String key : load.getConfigurationSection("items").getKeys(false)) {
                 purchasedItems.add(ItemManager.INSTANCE.findItem(load.getString("items." + key)));
             }

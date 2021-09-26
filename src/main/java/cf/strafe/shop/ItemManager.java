@@ -1,9 +1,14 @@
 package cf.strafe.shop;
 
 import cf.strafe.KnockBackFFA;
+import cf.strafe.shop.items.blocks.DarkPack;
 import cf.strafe.shop.items.blocks.Default;
 import cf.strafe.shop.items.hats.NoHat;
+import cf.strafe.shop.items.hats.PumpkinHat;
 import cf.strafe.shop.items.hats.SpaceHat;
+import cf.strafe.shop.items.sticks.BlazeStick;
+import cf.strafe.shop.items.sticks.DiamondStick;
+import cf.strafe.shop.items.sticks.PoppyStick;
 import cf.strafe.shop.items.sticks.Stick;
 import cf.strafe.shop.nodes.BlockItem;
 import cf.strafe.shop.nodes.HatItem;
@@ -21,6 +26,11 @@ import java.util.Random;
 public enum ItemManager {
     INSTANCE;
 
+
+    private final List<BlockItem> blockItems = new ArrayList<>();
+    private final List<StickItem> stickItems = new ArrayList<>();
+    private final List<HatItem> hatItems = new ArrayList<>();
+
     private final List<Item> items = new ArrayList<>();
     private final ConcurrentEvictingList<Item> availableItems = new ConcurrentEvictingList<>(3);
 
@@ -31,7 +41,40 @@ public enum ItemManager {
         items.add(new NoHat());
         items.add(new Default());
         items.add(new Stick());
+        items.add(new BlazeStick());
+        items.add(new PoppyStick());
+        items.add(new DarkPack());
+        items.add(new DiamondStick());
+        items.add(new PumpkinHat());
+
+
+        for(Item item : items) {
+            if(item.getPrice() > 0) {
+                if (item instanceof BlockItem) {
+                    blockItems.add((BlockItem) item);
+                } else if (item instanceof StickItem) {
+                    stickItems.add((StickItem) item);
+                } else if (item instanceof HatItem) {
+                    hatItems.add((HatItem) item);
+                }
+            }
+        }
+
+        if(blockItems.size() > 0) {
+            BlockItem blockItem = blockItems.get(new Random().nextInt(blockItems.size()));
+            availableItems.add(blockItem);
+        }
+        if(stickItems.size() > 0) {
+            StickItem stickItem = stickItems.get(new Random().nextInt(stickItems.size()));
+            availableItems.add(stickItem);
+        }
+        if(hatItems.size() > 0) {
+            HatItem hatItem = hatItems.get(new Random().nextInt(hatItems.size()));
+            availableItems.add(hatItem);
+        }
+
         countDown();
+
     }
 
     public void countDown() {
@@ -43,21 +86,6 @@ public enum ItemManager {
                     /*
                     If you have any other better way please send
                      */
-                    final List<BlockItem> blockItems = new ArrayList<>();
-                    final List<StickItem> stickItems = new ArrayList<>();
-                    final List<HatItem> hatItems = new ArrayList<>();
-
-                    for(Item item : items) {
-                        if(item.getPrice() > 0) {
-                            if (item instanceof BlockItem) {
-                                blockItems.add((BlockItem) item);
-                            } else if (item instanceof StickItem) {
-                                stickItems.add((StickItem) item);
-                            } else if (item instanceof HatItem) {
-                                hatItems.add((HatItem) item);
-                            }
-                        }
-                    }
 
                     if(blockItems.size() > 1) {
                         while(true) {

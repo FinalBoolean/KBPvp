@@ -7,7 +7,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 public class Config {
 
 
-    public static String KILL_MESSAGE, PREFIX, DEATH_MESSAGE, STREAK_MESSAGE;
+    public static String KILL_MESSAGE, PREFIX, DEATH_MESSAGE, STREAK_MESSAGE, FELL_MESSAGE;
     public static int Y_LEVEL;
     public static long DELAY;
 
@@ -34,10 +34,10 @@ public class Config {
         STREAK_MESSAGE = config.getString("messages.streak.message");
         Y_LEVEL = config.getInt("settings.yLevel");
         DELAY = config.getLong("broadcast-delay");
+        FELL_MESSAGE = config.getString("messages.killMessages.fellOff");
 
         for (String key : config.getConfigurationSection("announcements").getKeys(false)) {
             BROADCASTS++;
         }
-
     }
 }

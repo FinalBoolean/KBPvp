@@ -7,6 +7,6 @@ import org.bukkit.inventory.ItemStack;
 
 public class Default extends BlockItem {
     public Default() {
-        super("DEFAULT_PACK",new ItemStack(Material.WOOL, 1, DyeColor.GREEN.getData()), 0, new ItemStack(Material.WOOL, 1, DyeColor.YELLOW.getData()), new ItemStack(Material.WOOL, 1, DyeColor.RED.getData()));
+        super("DEFAULT_PACK",new ItemStack(Material.WOOL, 1, DyeColor.LIME.getData()), 0, new ItemStack(Material.WOOL, 1, DyeColor.YELLOW.getData()), new ItemStack(Material.WOOL, 1, DyeColor.RED.getData()));
     }
 }

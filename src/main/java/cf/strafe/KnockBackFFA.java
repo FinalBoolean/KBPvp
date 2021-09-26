@@ -11,6 +11,7 @@ import cf.strafe.shop.ItemManager;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 
+import java.io.File;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
@@ -30,6 +31,10 @@ public enum KnockBackFFA {
 
     public void onLoad(KnockBackPlugin plugin) {
         this.plugin = plugin;
+        final File f = new File(plugin.getDataFolder(), "config.yml");
+        if (!f.exists()) {
+            plugin.saveResource("config.yml", true);
+        }
     }
 
     public void onEnable() {

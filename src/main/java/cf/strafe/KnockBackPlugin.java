@@ -7,6 +7,7 @@ public class KnockBackPlugin extends JavaPlugin {
     @Override
     public void onLoad() {
         KnockBackFFA.INSTANCE.onLoad(this);
+
         super.onLoad();
     }
 

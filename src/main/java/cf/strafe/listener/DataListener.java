@@ -12,7 +12,7 @@ public class DataListener implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         DataManager.INSTANCE.addPlayer(event.getPlayer());
-        event.getPlayer().setGameMode(GameMode.ADVENTURE);
+        event.getPlayer().teleport(event.getPlayer().getWorld().getSpawnLocation());
     }
 
     @EventHandler

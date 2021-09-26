@@ -16,7 +16,7 @@ public class SelectGui extends Menu {
     @Override
     public void loadMenu() {
         for (int i = 0; i < 27; i++) {
-            inventory.setItem(i, new ItemStack(Material.STAINED_GLASS, 1, DyeColor.LIGHT_BLUE.getDyeData()));
+            inventory.setItem(i, new ItemStack(Material.STAINED_GLASS_PANE, 1, DyeColor.LIGHT_BLUE.getDyeData()));
         }
         inventory.setItem(12, createGuiItem(Material.ENDER_CHEST, "&6&o&lItem Shop", "", "&7Purchase custom block packs and knockback sticks using coins!"));
         inventory.setItem(14, createGuiItem(Material.CHEST, "&6&o&lMy Items", "", "&7Browse, equip and preview the cosmetics you own!"));
