@@ -5,6 +5,18 @@ messages:
   killMessages:
     deathMessage: "&cYou were knocked by %player%"
     killMessage: "&aYou knocked %player%"
+    fellOff: "&aYou fell off into the void."
 
 settings:
-  yLevel:
+  yLevel: 80
+
+broadcast-delay: 6000
+announcements:
+  announcement1:
+    - '&r'
+    - '&6&lTIP » &fJoin our /discord'
+    - '&r'
+  announcement2:
+    - '&r'
+    - '&6&lTIP » &fTeaming is not allowed! Please /report them!'
+    - '&r'

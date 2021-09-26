@@ -6,7 +6,7 @@ import lombok.Getter;
 import org.bukkit.inventory.ItemStack;
 
 @Getter
-public abstract class BlockItem extends Item {
+public class BlockItem extends Item {
 
     private final ItemStack phase1, phase2;
 

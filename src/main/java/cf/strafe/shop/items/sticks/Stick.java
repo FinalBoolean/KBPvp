@@ -6,6 +6,6 @@ import org.bukkit.inventory.ItemStack;
 
 public class Stick extends StickItem {
     public Stick() {
-        super("Stick",new ItemStack(Material.STICK), 0);
+        super("DEFAULT_STICK",new ItemStack(Material.STICK), 0);
     }
 }

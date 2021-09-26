@@ -1,5 +1,8 @@
 package cf.strafe.shop;
 
+import cf.strafe.shop.nodes.BlockItem;
+import cf.strafe.shop.nodes.HatItem;
+import cf.strafe.shop.nodes.StickItem;
 import lombok.Getter;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.inventory.ItemStack;
@@ -16,6 +19,18 @@ public class Item {
         this.icon = icon;
         this.category = category;
         this.price = price;
+    }
+
+    public boolean isStick() {
+        return this instanceof StickItem;
+    }
+
+    public boolean isHat() {
+        return this instanceof HatItem;
+    }
+
+    public boolean isBlock() {
+        return this instanceof BlockItem;
     }
 
 

@@ -1,0 +1,13 @@
+name: KBPvp
+main: cf.strafe.KnockBackPlugin
+description: Epic knock back ffa plugin
+version: 1.0
+commands:
+  shop:
+    description: Opens the shop
+  myhelmets:
+    description: Opens your helmets
+  mysticks:
+    description: Opens your sticks
+  mypacks:
+    description: Opens your packs
