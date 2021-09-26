@@ -2,6 +2,7 @@ package cf.strafe.shop.gui;
 
 import cf.strafe.data.PlayerData;
 import cf.strafe.util.ColorUtil;
+import net.minecraft.server.v1_8_R3.Items;
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -27,6 +28,21 @@ public abstract class Menu {
 
     public ItemStack createGuiItem(final Material material, final String name, final String... lore) {
         final ItemStack item = new ItemStack(material, 1);
+        final ItemMeta meta = item.getItemMeta();
+
+        assert meta != null;
+        meta.setDisplayName(ColorUtil.translate(name));
+
+        meta.setLore(ColorUtil.translate(Arrays.asList(lore)));
+
+        item.setItemMeta(meta);
+
+        return item;
+    }
+
+    public ItemStack createGuiItem(final ItemStack material, final String name, final String... lore) {
+        final ItemStack item = new ItemStack(material);
+        item.setAmount(1);
         final ItemMeta meta = item.getItemMeta();
 
         assert meta != null;

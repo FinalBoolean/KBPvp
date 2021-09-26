@@ -72,6 +72,7 @@ public class PlayerData {
         getPlayer().getInventory().setItem(getBlockSlot(), getBlockItem().getBlock());
         getPlayer().getInventory().setItem(getWebSlot(), new ItemStack(Material.WEB));
         getPlayer().getInventory().setItem(getPearlSlot(), new ItemStack(Material.ENDER_PEARL));
+        getPlayer().getInventory().setHelmet(getHatItem().getIcon());
         getPlayer().updateInventory();
     }
 

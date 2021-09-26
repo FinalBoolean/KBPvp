@@ -14,7 +14,7 @@ public class BlockGui extends Menu {
     @Override
     public void loadMenu() {
         data.getPurchasedItems().stream().filter(Item::isBlock).forEach(item -> {
-            inventory.addItem(createGuiItem(item.getIcon().getType(), "&f&o&l" + item.getName(), "&8Block Pack", "", "&aClick to select"));
+            inventory.addItem(createGuiItem(item.getIcon(), "&f&o&l" + item.getName(), "&8Block Pack", "", "&aClick to select"));
         });
         inventory.setItem(53, createGuiItem(Material.ARROW, "&cBack"));
     }

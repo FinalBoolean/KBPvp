@@ -29,10 +29,11 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.spigotmc</groupId>
-            <artifactId>spigot-api</artifactId>
-            <version>1.8.8-R0.1-SNAPSHOT</version>
-            <scope>provided</scope>
+            <groupId>com.spigot</groupId>
+            <artifactId>spigot</artifactId>
+            <scope>system</scope>
+            <version>1.0</version>
+            <systemPath>${project.basedir}/lib/spigot.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>

@@ -106,7 +106,7 @@ public class PlayerListener implements Listener {
                         e.setCancelled(true);
                         if (e.getCurrentItem() == null) return;
                         if (e.getCurrentItem().getItemMeta() == null) return;
-                        if(e.getCurrentItem().getItemMeta().getDisplayName() == null) return;
+                        if (e.getCurrentItem().getItemMeta().getDisplayName() == null) return;
                         if (e.getCurrentItem().getItemMeta().getDisplayName().contains("Item Shop")) {
                             ItemShopGui shopGui = new ItemShopGui(data);
                             shopGui.openGui();
@@ -120,14 +120,15 @@ public class PlayerListener implements Listener {
                         e.setCancelled(true);
                         if (e.getCurrentItem() == null) return;
                         if (e.getCurrentItem().getItemMeta() == null) return;
-                        if(e.getCurrentItem().getItemMeta().getDisplayName() == null) return;;
+                        if (e.getCurrentItem().getItemMeta().getDisplayName() == null) return;
+                        ;
                         Item item = ItemManager.INSTANCE.findItem(ChatColor.stripColor(e.getCurrentItem().getItemMeta().getDisplayName()));
                         if (item != null) {
-                            if(data.getPurchasedItems().contains(item)) {
+                            if (data.getPurchasedItems().contains(item)) {
                                 player.sendMessage(ChatColor.RED + "You already bought this item!");
                                 return;
                             }
-                            if (data.purchaseItem(item, player.hasPermission("ffa.admin"))) {
+                            if (data.purchaseItem(item)) {
                                 if (item instanceof BlockItem) {
                                     player.sendMessage(ColorUtil.translate("&aYou now have the &2" + item.getName() + " block pack!"));
                                     player.sendMessage(ColorUtil.translate("&2Run /mypacks to see it"));
@@ -171,7 +172,7 @@ public class PlayerListener implements Listener {
                         e.setCancelled(true);
                         if (e.getCurrentItem() == null) return;
                         if (e.getCurrentItem().getItemMeta() == null) return;
-                        if(e.getCurrentItem().getItemMeta().getDisplayName() == null) return;
+                        if (e.getCurrentItem().getItemMeta().getDisplayName() == null) return;
 
                         Item item = ItemManager.INSTANCE.findItem(ChatColor.stripColor(e.getCurrentItem().getItemMeta().getDisplayName()));
                         if (item != null) {

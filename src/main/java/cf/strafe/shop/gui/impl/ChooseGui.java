@@ -14,7 +14,7 @@ public class ChooseGui extends Menu {
     public void loadMenu() {
         inventory.setItem(12, createGuiItem(data.getStickItem().getIcon().getType(), "&6My Sticks", "", "&7Browse, equip and preview", "&7the knockback sticks you own!"));
         inventory.setItem(13, createGuiItem(data.getHatItem().getIcon().getType(), "&6My Helmets", "", "&7Browse, equip and preview", "&7the helmets you own!"));
-        inventory.setItem(14, createGuiItem(data.getBlockItem().getIcon().getType(), "&6My Blocks", "", "&7Browse, equip and preview", "&7the blocks you own!"));
+        inventory.setItem(14, createGuiItem(data.getBlockItem().getIcon(), "&6My Blocks", "", "&7Browse, equip and preview", "&7the blocks you own!"));
         inventory.setItem(26, createGuiItem(Material.ARROW, "&cBack"));
     }
 }
