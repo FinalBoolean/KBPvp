@@ -11,3 +11,5 @@ commands:
     description: Opens your sticks
   mypacks:
     description: Opens your packs
+  kitedit:
+    description: Edits your layout

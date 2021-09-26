@@ -1,5 +1,6 @@
 package cf.strafe.listener;
 
+import cf.strafe.KnockBackFFA;
 import cf.strafe.config.Config;
 import cf.strafe.data.DataManager;
 import cf.strafe.data.PlayerData;
@@ -11,7 +12,9 @@ import cf.strafe.shop.nodes.HatItem;
 import cf.strafe.shop.nodes.StickItem;
 import cf.strafe.util.ColorUtil;
 import cf.strafe.util.DecayBlock;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -21,6 +24,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class PlayerListener implements Listener {
 
@@ -29,10 +33,15 @@ public class PlayerListener implements Listener {
     public void onMove(PlayerMoveEvent event) {
         PlayerData data = DataManager.INSTANCE.getPlayer(event.getPlayer());
         if (event.getTo().getY() < Config.Y_LEVEL && event.getTo().getY() > -30) {
+            if(data.isEditing()) {
+                data.getPlayer().sendMessage(ChatColor.RED + "You cannot do jump down right now!");
+                data.getPlayer().sendMessage(ChatColor.RED + "Run /kitedit save to jump down!");
+                data.getPlayer().teleport(data.getPlayer().getWorld().getSpawnLocation());
+                return;
+            }
             if (!data.isInArena()) {
                 data.setInArena(true);
-                data.getPlayer().getInventory().addItem(data.getStickItem().getStick());
-                data.getPlayer().getInventory().addItem(new ItemStack(data.getBlockItem().getIcon().getType(), 64));
+
                 //TODO: Add more items here
             }
         } else if (event.getTo().getY() < -30) {
@@ -63,8 +72,13 @@ public class PlayerListener implements Listener {
         if (item != null && item.isBlock()) {
             new DecayBlock(event.getBlock().getLocation(), (BlockItem) item);
             event.getPlayer().getInventory().addItem(item.getIcon());
+        } else {
+            if(event.getItemInHand().getType() == Material.WEB) {
+                Bukkit.getScheduler().runTaskLater(KnockBackFFA.INSTANCE.getPlugin(), () -> {
+                    event.getBlock().setType(Material.AIR);
+                }, 60);
+            }
         }
-
 
     }
 

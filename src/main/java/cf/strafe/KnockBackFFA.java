@@ -1,5 +1,6 @@
 package cf.strafe;
 
+import cf.strafe.commands.KitEditCommand;
 import cf.strafe.commands.MyHelmetsCommand;
 import cf.strafe.commands.MyPacksCommand;
 import cf.strafe.commands.MySticksCommand;
@@ -19,6 +20,10 @@ import java.util.concurrent.ScheduledExecutorService;
 @Getter
 public enum KnockBackFFA {
     INSTANCE;
+
+    /**
+     * TODO: Add rotational maps?
+     */
 
     private final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
 
@@ -52,5 +57,6 @@ public enum KnockBackFFA {
         plugin.getCommand("myhelmets").setExecutor(new MyHelmetsCommand());
         plugin.getCommand("mypacks").setExecutor(new MyPacksCommand());
         plugin.getCommand("mysticks").setExecutor(new MySticksCommand());
+        plugin.getCommand("kitedit").setExecutor(new KitEditCommand());
     }
 }

@@ -6,7 +6,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 
 public class DecayBlock {
-    private int stage;
 
     public DecayBlock(Location location, BlockItem blockItem) {
 

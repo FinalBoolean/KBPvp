@@ -11,8 +11,10 @@ import cf.strafe.util.ColorUtil;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,13 +33,17 @@ public class PlayerData {
     private StickItem stickItem;
     private BlockItem blockItem;
     private HatItem hatItem;
-    private int coins, deaths, kills, killStreak;
-    private boolean inArena;
+    private int coins, deaths, kills, killStreak, stickSlot, blockSlot, webSlot, pearlSlot;
+    private boolean inArena, editing;
     private PlayerData lastAttacked;
 
     public PlayerData(Player player) {
         this.player = player;
         this.uuid = player.getUniqueId();
+        stickSlot = 0;
+        blockSlot = 1;
+        webSlot = 2;
+        pearlSlot = 3;
     }
 
     public boolean purchaseItem(Item item) {
@@ -54,10 +60,19 @@ public class PlayerData {
 
     public void clearInventory() {
         player.getInventory().clear();
-        player.getPlayer().getInventory().setHelmet(null);
-        player.getPlayer().getInventory().setChestplate(null);
-        player.getPlayer().getInventory().setLeggings(null);
-        player.getPlayer().getInventory().setBoots(null);
+        player.getInventory().setHelmet(null);
+        player.getInventory().setChestplate(null);
+        player.getInventory().setLeggings(null);
+        player.getInventory().setBoots(null);
+    }
+
+    public void loadLayout() {
+        player.getInventory().setItem(getStickSlot(), stickItem.getStick());
+        player.getInventory().setItem(getBlockSlot(), new ItemStack(blockItem.getIcon().getType(), 64));
+        player.getInventory().setItem(getPearlSlot(), new ItemStack(Material.ENDER_PEARL));
+        player.getInventory().setItem(getWebSlot(), new ItemStack(Material.WEB));
+        player.getInventory().setHelmet(hatItem.getIcon());
+        player.updateInventory();
     }
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
@@ -78,6 +93,7 @@ public class PlayerData {
         } else {
             final YamlConfiguration load = YamlConfiguration.loadConfiguration(player);
             load.set("kills", getKills());
+            load.set("killStreak", getKillStreak());
             load.set("deaths", getDeaths());
             load.set("coins", getCoins());
             load.set("blockItem", blockItem.getName());
@@ -91,16 +107,13 @@ public class PlayerData {
 
     public void killPlayer() {
         if(lastAttacked != null) {
-            lastAttacked.getPlayer().sendMessage(ColorUtil.translate(Config.KILL_MESSAGE).replace("%player%", player.getName()));
+            lastAttacked.loadLayout();
             player.sendMessage(ColorUtil.translate(Config.DEATH_MESSAGE).replace("%player%", lastAttacked.getPlayer().getName()));
-
             lastAttacked.setKills(lastAttacked.getKills() + 1);
             lastAttacked.setKillStreak(lastAttacked.getKillStreak() + 1);
-
             setKillStreak(0);
             setDeaths(getDeaths() + 1);
         } else player.sendMessage(ColorUtil.translate(Config.DEATH_MESSAGE));
-
         clearInventory();
         player.teleport(player.getWorld().getSpawnLocation());
     }
@@ -152,6 +165,7 @@ public class PlayerData {
         } else {
             final YamlConfiguration load = YamlConfiguration.loadConfiguration(player);
             setKills(load.getInt("kills"));
+            setKillStreak(load.getInt("killStreak"));
             setDeaths(load.getInt("deaths"));
             setCoins(load.getInt("coins"));
             for(String key : load.getKeys(false)) {

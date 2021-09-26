@@ -24,7 +24,7 @@ public enum ItemManager {
     private final List<Item> items = new ArrayList<>();
     private final ConcurrentEvictingList<Item> availableItems = new ConcurrentEvictingList<>(3);
 
-    private final CountDown date = new CountDown(3000);
+    private final CountDown date = new CountDown(3600);
 
     public void init() {
         items.add(new SpaceHat());
