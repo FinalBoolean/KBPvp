@@ -10,6 +10,7 @@ import cf.strafe.shop.nodes.BlockItem;
 import cf.strafe.shop.nodes.HatItem;
 import cf.strafe.shop.nodes.StickItem;
 import cf.strafe.util.ColorUtil;
+import cf.strafe.util.DecayBlock;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -32,7 +33,9 @@ public class PlayerListener implements Listener {
         if (event.getTo().getY() < Config.Y_LEVEL && event.getTo().getY() > -30) {
             if (!data.isInArena()) {
                 data.setInArena(true);
-
+                data.getPlayer().getInventory().addItem(data.getStickItem().getStick());
+                data.getPlayer().getInventory().addItem(new ItemStack(data.getBlockItem().getIcon().getType(), 64));
+                //TODO: Add more items here
             }
         } else if (event.getTo().getY() < -30) {
             data.killPlayer();
@@ -59,9 +62,12 @@ public class PlayerListener implements Listener {
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent event) {
         Item item = ItemManager.INSTANCE.findItem(ChatColor.stripColor(event.getItemInHand().getItemMeta().getDisplayName()));
-        if(item != null && item.isBlock()) {
-
+        if (item != null && item.isBlock()) {
+            new DecayBlock(event.getBlock().getLocation(), (BlockItem) item);
+            event.getPlayer().getInventory().addItem(item.getIcon());
         }
+
+
     }
 
     @EventHandler
