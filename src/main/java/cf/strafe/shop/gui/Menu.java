@@ -2,7 +2,6 @@ package cf.strafe.shop.gui;
 
 import cf.strafe.data.PlayerData;
 import cf.strafe.util.ColorUtil;
-import net.minecraft.server.v1_8_R3.Items;
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;

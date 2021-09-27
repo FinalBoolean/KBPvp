@@ -1,7 +1,6 @@
 package cf.strafe.commands;
 
 import cf.strafe.data.DataManager;
-import cf.strafe.shop.gui.impl.BlockGui;
 import cf.strafe.shop.gui.impl.SelectGui;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

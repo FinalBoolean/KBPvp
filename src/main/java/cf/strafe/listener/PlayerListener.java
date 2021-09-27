@@ -25,8 +25,6 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public class PlayerListener implements Listener {
 
@@ -36,8 +34,8 @@ public class PlayerListener implements Listener {
         PlayerData data = DataManager.INSTANCE.getPlayer(event.getPlayer());
         if (event.getTo().getY() < Config.Y_LEVEL && event.getTo().getY() > -30) {
             if (data.isEditing()) {
-                data.getPlayer().sendMessage(ChatColor.RED + "You cannot do jump down right now!");
-                data.getPlayer().sendMessage(ChatColor.RED + "Run /kitedit save to jump down!");
+                data.getPlayer().sendMessage(ChatColor.RED + "You must save your layout before jumping down!");
+                data.getPlayer().sendMessage(ChatColor.RED + "Run /kitedit");
                 data.getPlayer().teleport(data.getPlayer().getWorld().getSpawnLocation());
                 return;
             }
@@ -71,7 +69,7 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onPlayerDrop(PlayerDropItemEvent event) {
-        if(!event.getPlayer().hasPermission("ffa.admin")) {
+        if (!event.getPlayer().hasPermission("ffa.admin")) {
             event.setCancelled(true);
         }
     }

@@ -3,7 +3,6 @@ package cf.strafe.shop.nodes;
 import cf.strafe.shop.Item;
 import cf.strafe.util.ColorUtil;
 import lombok.Getter;
-import org.bukkit.ChatColor;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
