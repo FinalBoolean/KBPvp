@@ -98,7 +98,8 @@ public enum ItemManager {
                             }
                         }
 
-                    } else if(stickItems.size() > 1) {
+                    }
+                    if(stickItems.size() > 1) {
                         while(true) {
                             StickItem stickItem = stickItems.get(new Random().nextInt(stickItems.size()));
                             if(!availableItems.contains(stickItem)) {
@@ -106,7 +107,8 @@ public enum ItemManager {
                                 break;
                             }
                         }
-                    } else if(hatItems.size() > 1) {
+                    }
+                    if(hatItems.size() > 1) {
                         while(true) {
                             HatItem hatItem = hatItems.get(new Random().nextInt(hatItems.size()));
                             if(!availableItems.contains(hatItem)) {
