@@ -25,39 +25,18 @@ public class KitEditCommand implements CommandExecutor {
         if (sender instanceof Player) {
             PlayerData data = DataManager.INSTANCE.getPlayer(((Player) sender).getPlayer());
 
-            if(args.length == 0) {
+            if (args.length == 0) {
                 if (data.isInArena()) {
                     data.getPlayer().sendMessage(ChatColor.RED + "You need to be in spawn to use this command!");
                     return false;
                 }
-                if(data.isEditing()) {
-                    data.getPlayer().sendMessage(ChatColor.RED + "You are already saving.");
-                    return false;
-                }
-
-
-                data.getPlayer().getInventory().setItem(data.getStickSlot(), data.getStickItem().getStick());
-                data.getPlayer().getInventory().setItem(data.getBlockSlot(), data.getBlockItem().getBlock());
-                data.getPlayer().getInventory().setItem(data.getWebSlot(), new ItemStack(Material.WEB));
-                data.getPlayer().getInventory().setItem(data.getPearlSlot(), new ItemStack(Material.ENDER_PEARL));
-                data.getPlayer().updateInventory();
-                data.setEditing(true);
-
-                data.getPlayer().sendMessage(ChatColor.GREEN + "Move your items around to configure.");
-                data.getPlayer().sendMessage(ChatColor.AQUA + "Run /kitedit save when you're done!");
-            } else {
-                if(args[0].equalsIgnoreCase("save")) {
-                    if(!data.isEditing()) {
-                        data.getPlayer().sendMessage(ChatColor.RED + "You are not editing your layout!");
-                        return false;
-                    }
-                    //Just in case of lag.
+                if (data.isEditing()) {
                     KnockBackFFA.INSTANCE.getExecutorService().execute(() -> {
-                        for(int i = 0; i < 9; i++) {
+                        for (int i = 0; i < 9; i++) {
                             ItemStack itemStack = data.getPlayer().getInventory().getItem(i);
-                            if(itemStack == null) continue;
+                            if (itemStack == null) continue;
                             Item item = ItemManager.INSTANCE.findItem(ChatColor.stripColor(itemStack.getItemMeta().getDisplayName()));
-                            if(item != null) {
+                            if (item != null) {
                                 if (item instanceof BlockItem) {
                                     data.setBlockSlot(i);
                                 } else if (item instanceof StickItem) {
@@ -80,10 +59,19 @@ public class KitEditCommand implements CommandExecutor {
                         data.clearInventory();
                         data.setEditing(false);
                     });
-
-                } else {
-                    data.getPlayer().sendMessage(ChatColor.RED + "Invalid command! Usage: /kitedit save");
+                    return false;
                 }
+
+
+                data.getPlayer().getInventory().setItem(data.getStickSlot(), data.getStickItem().getStick());
+                data.getPlayer().getInventory().setItem(data.getBlockSlot(), data.getBlockItem().getBlock());
+                data.getPlayer().getInventory().setItem(data.getWebSlot(), new ItemStack(Material.WEB));
+                data.getPlayer().getInventory().setItem(data.getPearlSlot(), new ItemStack(Material.ENDER_PEARL));
+                data.getPlayer().updateInventory();
+                data.setEditing(true);
+
+                data.getPlayer().sendMessage(ChatColor.GREEN + "Move your items around to configure.");
+                data.getPlayer().sendMessage(ChatColor.AQUA + "Run /kitedit when you're done!");
             }
         }
         return false;

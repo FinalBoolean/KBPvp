@@ -3,13 +3,12 @@ package cf.strafe.shop;
 import cf.strafe.KnockBackFFA;
 import cf.strafe.shop.items.blocks.DarkPack;
 import cf.strafe.shop.items.blocks.Default;
+import cf.strafe.shop.items.blocks.WhitePack;
+import cf.strafe.shop.items.hats.ChestHat;
 import cf.strafe.shop.items.hats.NoHat;
 import cf.strafe.shop.items.hats.PumpkinHat;
 import cf.strafe.shop.items.hats.SpaceHat;
-import cf.strafe.shop.items.sticks.BlazeStick;
-import cf.strafe.shop.items.sticks.DiamondStick;
-import cf.strafe.shop.items.sticks.PoppyStick;
-import cf.strafe.shop.items.sticks.Stick;
+import cf.strafe.shop.items.sticks.*;
 import cf.strafe.shop.nodes.BlockItem;
 import cf.strafe.shop.nodes.HatItem;
 import cf.strafe.shop.nodes.StickItem;
@@ -46,6 +45,9 @@ public enum ItemManager {
         items.add(new DarkPack());
         items.add(new DiamondStick());
         items.add(new PumpkinHat());
+        items.add(new WhitePack());
+        items.add(new ChestHat());
+        items.add(new StoneAxe());
 
 
         for(Item item : items) {
