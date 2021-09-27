@@ -25,16 +25,18 @@ public class BroadcastManager {
             if (counter > Config.BROADCASTS) {
                 counter = 1;
             }
+            int count = 0;
             List<String> messages = config.getStringList("announcements.announcement" + counter);
             for (String message : messages) {
-
+                count++;
                 for (PlayerData data : DataManager.INSTANCE.getPlayerDataMap().values()) {
                     if (message.contains("[center]")) {
                         sendCenteredMessage(data.getPlayer(), message.replace("[center]", ""));
                     } else {
                         data.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', message));
                     }
-                    data.saveData();
+                    if (count == 1)
+                        data.saveData();
                 }
             }
         }, 0, Config.DELAY);
