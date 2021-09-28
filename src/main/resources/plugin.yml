@@ -13,3 +13,9 @@ commands:
     description: Opens your packs
   kitedit:
     description: Edits your layout
+  createhelmet:
+    description: Allows the user to create a helmet item
+  createpack:
+    description: Allows the user to create a block pack
+  createstick:
+    description: Allows the user to create a stick item

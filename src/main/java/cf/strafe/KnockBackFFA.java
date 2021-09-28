@@ -7,6 +7,7 @@ import cf.strafe.listener.DataListener;
 import cf.strafe.listener.PlayerListener;
 import cf.strafe.manager.BroadcastManager;
 import cf.strafe.manager.ScoreboardManager;
+import cf.strafe.shop.Item;
 import cf.strafe.shop.ItemManager;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -48,6 +49,7 @@ public enum KnockBackFFA {
     }
 
     public void onDisable() {
+        ItemManager.INSTANCE.saveItems();
         Bukkit.getOnlinePlayers().forEach(DataManager.INSTANCE::removePlayer);
         System.out.println("Disabling KnockBack core");
     }
@@ -62,5 +64,8 @@ public enum KnockBackFFA {
         plugin.getCommand("mysticks").setExecutor(new MySticksCommand());
         plugin.getCommand("kitedit").setExecutor(new KitEditCommand());
         plugin.getCommand("shop").setExecutor(new ShopCommand());
+        plugin.getCommand("createhelmet").setExecutor(new CreateHelmetCommand());
+        plugin.getCommand("createpack").setExecutor(new CreatePackCommand());
+        plugin.getCommand("createstick").setExecutor(new CreateStickCommand());
     }
 }
