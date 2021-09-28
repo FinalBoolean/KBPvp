@@ -15,6 +15,7 @@ public class StickItem extends Item {
         ItemStack stick = new ItemStack(icon);
         ItemMeta itemMeta = stick.getItemMeta();
         itemMeta.setDisplayName(ColorUtil.translate("&f&l&o" + name));
+        itemMeta.spigot().setUnbreakable(true);
         stick.setItemMeta(itemMeta);
         stick.addUnsafeEnchantment(Enchantment.KNOCKBACK, 1);
         this.stick = stick;
