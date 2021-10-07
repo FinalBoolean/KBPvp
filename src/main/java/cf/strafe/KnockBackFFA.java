@@ -50,7 +50,7 @@ public enum KnockBackFFA {
 
     public void onDisable() {
         ItemManager.INSTANCE.saveItems();
-        Bukkit.getOnlinePlayers().forEach(DataManager.INSTANCE::removePlayer);
+        DataManager.INSTANCE.saveAll();
         System.out.println("Disabling KnockBack core");
     }
 

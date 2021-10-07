@@ -28,6 +28,13 @@ public enum DataManager {
         });
     }
 
+    public void saveAll() {
+        for(PlayerData data : playerDataMap.values()) {
+            data.saveData();
+            playerDataMap.remove(player.getUniqueId(), new PlayerData(player));
+        }
+    }
+
     public PlayerData getPlayer(Player player) {
         return playerDataMap.get(player.getUniqueId());
     }
