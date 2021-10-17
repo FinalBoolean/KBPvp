@@ -6,6 +6,7 @@ import cf.strafe.data.DataManager;
 import cf.strafe.listener.DataListener;
 import cf.strafe.listener.PlayerListener;
 import cf.strafe.manager.BroadcastManager;
+import cf.strafe.manager.MapManager;
 import cf.strafe.manager.ScoreboardManager;
 import cf.strafe.shop.Item;
 import cf.strafe.shop.ItemManager;
@@ -41,6 +42,7 @@ public enum KnockBackFFA {
     public void onEnable() {
         Config.loadConfigurations();
         ItemManager.INSTANCE.init();
+        MapManager.INSTANCE.load();
         scoreboardManager = new ScoreboardManager();
         broadcastManager = new BroadcastManager();
         handleBukkit();
@@ -49,6 +51,7 @@ public enum KnockBackFFA {
     }
 
     public void onDisable() {
+        MapManager.INSTANCE.save();
         ItemManager.INSTANCE.saveItems();
         DataManager.INSTANCE.saveAll();
         System.out.println("Disabling KnockBack core");
