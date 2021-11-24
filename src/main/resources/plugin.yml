@@ -19,3 +19,5 @@ commands:
     description: Allows the user to create a block pack
   createstick:
     description: Allows the user to create a stick item
+  sumo:
+    description: Create's sumo events

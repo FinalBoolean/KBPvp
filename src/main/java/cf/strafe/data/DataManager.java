@@ -24,6 +24,7 @@ public enum DataManager {
     public void removePlayer(Player player) {
         KnockBackFFA.INSTANCE.getExecutorService().execute(() -> {
             getPlayer(player).saveData();
+            KnockBackFFA.INSTANCE.getScoreboardManager().remove(player);
             playerDataMap.remove(player.getUniqueId(), new PlayerData(player));
         });
     }
@@ -31,8 +32,8 @@ public enum DataManager {
     public void saveAll() {
         for(PlayerData data : playerDataMap.values()) {
             data.saveData();
-            playerDataMap.remove(player.getUniqueId(), new PlayerData(player));
         }
+        playerDataMap.clear();
     }
 
     public PlayerData getPlayer(Player player) {

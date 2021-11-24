@@ -70,5 +70,6 @@ public enum KnockBackFFA {
         plugin.getCommand("createhelmet").setExecutor(new CreateHelmetCommand());
         plugin.getCommand("createpack").setExecutor(new CreatePackCommand());
         plugin.getCommand("createstick").setExecutor(new CreateStickCommand());
+        plugin.getCommand("sumo").setExecutor(new SumoCommand());
     }
 }
